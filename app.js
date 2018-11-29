@@ -1,3 +1,17 @@
+var mongoose = require('mongoose');
+var config = require('./Config');
+var dbUrl = config.MONGO_URI;
+
+// CAPTURE APP TERMINATION / RESTART EVENTS
+// To be called when process is restarted or terminated
+var gracefulShutdown = function(callback) {
+  mongoose.connection.close(function(err) {
+    callback(err);
+  });
+};
+
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -38,4 +52,23 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+mongoose.connect(dbUrl, function(err) {
+  if (!err) {
+    return console.log('Successfully connected to mongoDB');
+  }
+  console.error(err);
+  gracefulShutdown(function(err) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('Could not connect to mongoDB');
+    }
+    process.exit(1);
+  });
+});
+
+
+
 module.exports = app;
+
+require('./models/note.model');
