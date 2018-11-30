@@ -33,15 +33,7 @@ passport.use('googleToken',new GooglePlusTokenStrategy({
                 return done(null, existingUser);
             }
             else{
-                const user ={
-                    googleId: profile.id,
-                    email: profile.emails[0].value,
-                    firstname:profile.name.givenName,
-                    lastname:profile.name.familyName,
-                    notes:[] 
-                };
-                console.log(user);
-                
+                           
                 User.create(user, function(err, newUser) {
                     if (err) {
                       return next(err);
