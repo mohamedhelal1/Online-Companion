@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
+var config = require('../Config');
 var router = express.Router();
 var noteCtrl = require('../controllers/note.controller');
 var authCtrl = require('../controllers/auth.controller');
@@ -15,7 +16,7 @@ var isAuthenticated = function(req, res, next) {
     });
   }
   // Verify that the JWT is created using our server secret and that it hasn't expired yet
-  jwt.verify(token, req.app.get('secret'), function(err, decodedToken) {
+  jwt.verify(token,config.SECRET , function(err, decodedToken) {
     if (err) {
       return res.status(401).json({
         error: err,

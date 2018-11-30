@@ -5,7 +5,8 @@ var User = mongoose.model('User');
 
 
 module.exports.createNote = function(req, res, next) {
-    User.findById(req.decodedToken.user._id).exec(function(err, user) {
+    console.log(req.decodedToken);
+    User.findById(req.decodedToken.data._id).exec(function(err, user) {
         if (err) {
           return next(err);
         }
@@ -48,7 +49,7 @@ module.exports.createNote = function(req, res, next) {
   };
 
   module.exports.getNotes = function(req, res, next) {
-    User.findById(req.decodedToken.user._id).exec(function(err, user) {
+    User.findById(req.decodedToken.data._id).exec(function(err, user) {
         if (err) {
           return next(err);
         }
@@ -75,7 +76,7 @@ module.exports.createNote = function(req, res, next) {
           data: null
         });
       }
-    User.findById(req.decodedToken.user._id).exec(function(err, user) {
+    User.findById(req.decodedToken.data._id).exec(function(err, user) {
         if (err) {
           return next(err);
         }
@@ -116,7 +117,7 @@ module.exports.updateNote = function(req, res, next) {
           data: null
         });
       }
-    User.findById(req.decodedToken.user._id).exec(function(err, user) {
+    User.findById(req.decodedToken.data._id).exec(function(err, user) {
         if (err) {
           return next(err);
         }
