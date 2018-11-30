@@ -1,3 +1,34 @@
+var mongoose = require('mongoose');
+var config = require('./Config');
+
+var { db: { host, port, name } } = config;
+const dbUrl = `mongodb://${host}:${port}/${name}`;
+
+
+mongoose.connect(dbUrl, function(err) {
+  if (!err) {
+    return console.log('Successfully connected to mongoDB');
+  }
+  console.error(err);
+  gracefulShutdown(function(err) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('Could not connect to mongoDB');
+    }
+    process.exit(1);
+  });
+});
+// CAPTURE APP TERMINATION / RESTART EVENTS
+// To be called when process is restarted or terminated
+var gracefulShutdown = function(callback) {
+  mongoose.connection.close(function(err) {
+    callback(err);
+  });
+};
+
+require('./models/user.model');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -37,5 +68,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
+
 
 module.exports = app;
