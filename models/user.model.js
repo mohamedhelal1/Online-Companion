@@ -9,7 +9,7 @@ var noteSchema = mongoose.Schema({
   });
 
 var userSchema = mongoose.Schema({
-        id: {
+        googleId: {
         type: String
         },
         email: {
@@ -27,12 +27,4 @@ var userSchema = mongoose.Schema({
 
 
   // Override the transform function of the schema to delete the password before it returns the object
-if (!userSchema.options.toObject) {
-    userSchema.options.toObject = {};
-  }
-  userSchema.options.toObject.transform = (document, transformedDocument) => {
-    delete transformedDocument.password;
-    return transformedDocument;
-  };
-  
   mongoose.model('User', userSchema);
