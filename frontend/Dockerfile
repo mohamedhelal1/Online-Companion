@@ -1,5 +1,5 @@
 # base image
-FROM node:9.6.1
+FROM node:10
 
 
 WORKDIR /usr/src/app
@@ -11,7 +11,7 @@ COPY package*.json ./
 
 # install and cache app dependencies
 RUN npm install
-RUN npm install -g @angular/cli@1.7.1
+RUN npm install -g @angular/cli
 
 # add app
 COPY . .
