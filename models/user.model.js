@@ -1,39 +1,28 @@
 var mongoose = require('mongoose');
 
 var noteSchema = mongoose.Schema({
-    description: {
-      type: String,
-      required: true,
-      trim: true
-    }
+        description: {
+        type: String,
+        required: true,
+        trim: true
+        }
   });
 
 var userSchema = mongoose.Schema({
-    method: {
-      type: String,
-      enum: ['local', 'google'],
-      required: true
-    },
-    local: {
-      email: {
+        id: {
+        type: String
+        },
+        email: {
         type: String,
         lowercase: true
-      },
-      password: { 
+        },
+        firstname: {
         type: String
-      },
-      notes: [noteSchema]
-    },
-    google: {
-      id: {
+        },
+        lastname: {
         type: String
-      },
-      email: {
-        type: String,
-        lowercase: true
-      },
-      notes: [noteSchema]
-    }
+        },
+        notes: [noteSchema]
   });
 
 
@@ -42,9 +31,7 @@ if (!userSchema.options.toObject) {
     userSchema.options.toObject = {};
   }
   userSchema.options.toObject.transform = (document, transformedDocument) => {
-    if (this.method === 'local') {
-        delete transformedDocument.local.password;
-    }
+    delete transformedDocument.password;
     return transformedDocument;
   };
   
