@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var config = require('./Config');
-var dbUrl = config.MONGO_URI;
+
+var { db: { host, port, name } } = config;
+const dbUrl = `mongodb://${host}:${port}/${name}`;
+
 
 mongoose.connect(dbUrl, function(err) {
   if (!err) {
