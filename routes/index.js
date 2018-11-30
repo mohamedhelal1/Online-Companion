@@ -6,5 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/note/create', noteCtrl.createNote);
+//------------------------------------NOTE ROUTES----------------------------------
+
+router.post('/note/createNote', noteCtrl.createNote);
+router.get('/note/getNotes', noteCtrl.getNotes);
+router.delete('/note/deleteNote/:noteID', noteCtrl.deleteNote);
+router.patch('/note/updateNote/:noteID',noteCtrl.updateNote);
+
 module.exports = router;

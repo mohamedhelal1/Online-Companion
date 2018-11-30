@@ -14,3 +14,17 @@ module.exports.createNote = function(req, res, next) {
         });
       });
   };
+
+  module.exports.getNotes = function(req, res, next) {
+  
+  };
+
+
+
+  module.exports.deleteNote = function(req, res, next) {
+  
+};
+
+module.exports.updateNote = function(req, res, next) {
+  
+};
