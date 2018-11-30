@@ -27,7 +27,7 @@ var gracefulShutdown = function(callback) {
   });
 };
 
-require('./models/note.model');
+require('./models/user.model');
 
 var createError = require('http-errors');
 var express = require('express');
