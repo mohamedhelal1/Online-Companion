@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, GoogleLoginProvider} from 'angular5-social-login';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class NavbarComponent implements OnInit {
 
   constructor(private auth : AuthService,
-               private http: HttpClientModule) { }
+               private http: HttpClient) { }
 
 
   token:string;
