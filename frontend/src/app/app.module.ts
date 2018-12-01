@@ -5,12 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+
 import {
   AuthServiceConfig,
   GoogleLoginProvider,
+  SocialLoginModule
 } from "angular5-social-login";
 
-// Configs 
+
+
+// Configs
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
       [
@@ -31,12 +36,17 @@ export function getAuthServiceConfigs() {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    SocialLoginModule,
+
     ],
-  providers: [ {
-    provide: AuthServiceConfig,
-    useFactory: getAuthServiceConfigs
-  }],
+    providers: [
+        {
+          provide: AuthServiceConfig,
+          useFactory: getAuthServiceConfigs
+        }
+      ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
