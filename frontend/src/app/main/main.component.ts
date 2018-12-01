@@ -12,7 +12,6 @@ export class MainComponent implements OnInit {
 constructor(private notes : NotesService,private weather : WeatherService) { }
 
   ngOnInit() {
-    console.log(this.weather.getLocation())
   }
 
 }

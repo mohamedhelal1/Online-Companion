@@ -8,14 +8,9 @@ export class WeatherService {
   constructor() { }
 
 
-  getLocation()
-  {
-    if (window.navigator && window.navigator.geolocation) {
-        window.navigator.geolocation.getCurrentPosition(
-            position => {
-                    return position;
-            }
-        );
-    };
-  }
+  //       window.navigator.geolocation.getCurrentPosition(
+  //           position => {
+  //                   return position;
+  //           }
+  //       );
 }
