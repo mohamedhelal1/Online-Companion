@@ -24,7 +24,7 @@ export class NotesService {
       title: titleIn,
       description: descriptionIn,
     }
-    this.http.post(appConfig.apiUrl + 'http://localhost:80/note/createNote' ,this.token, body)
+    this.http.post('http://localhost:80/note/createNote' ,this.token, body)
     .subscribe(res => {
        //worth it?
        this.getNotes();
@@ -44,7 +44,7 @@ export class NotesService {
       title: titleIn,
       description: descriptionIn,
     }
-    this.http.patch(appConfig.apiUrl + 'http://localhost:80/note/updateNote/:' +noteID,this.token , body)
+    this.http.patch('http://localhost:80/note/updateNote/:' +noteID,this.token , body)
     .subscribe(res => {
        //worth it?
        this.getNotes();
