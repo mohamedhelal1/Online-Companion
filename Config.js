@@ -11,6 +11,7 @@ const config = {
     port: 27017,
     name: 'onlinecompanion'
   }
+  weatherAppID:'9bfb6ba731b046716b4b801600c75b18'
   //MONGO_URI:'mongodb://mongo:27017/onlinecompanion'
 };
 
