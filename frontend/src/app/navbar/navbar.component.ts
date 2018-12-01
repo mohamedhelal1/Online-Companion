@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleAuthService } from '../services/google-auth.service';
+import { AuthService, GoogleLoginProvider} from 'angular5-social-login';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +9,26 @@ import { GoogleAuthService } from '../services/google-auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth : GoogleAuthService) { }
+  constructor(private auth : AuthService,
+               private http: HttpClient) { }
+  
+  
+  token:string;
 
   ngOnInit() {
   }
-
+  public socialSignIn() {
+    
+     let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    
+    
+    this.auth.signIn(socialPlatformProvider).then(
+      (userData) => {
+        this.http.post("http://localhost:80/auth/login", { token: userData.idToken } )
+        .subscribe((res: any) => {
+          this.token=res.data.token
+        });        
+      }
+    );
+  }
 }
