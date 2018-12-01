@@ -1,5 +1,5 @@
 const OpenWeatherMapHelper = require("openweathermap-node");
-var config = require('./Config');
+var config = require('../Config');
 
 const helper = new OpenWeatherMapHelper({
   APPID: config.weatherAppID,
