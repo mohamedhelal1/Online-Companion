@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import {appConfig} from "../../app.config";
 
 import {
   AuthServiceConfig,
@@ -21,7 +22,7 @@ export function getAuthServiceConfigs() {
       [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider("1056543646824-gj2qrem1jjrq55vmjo86adrqnip6aol5.apps.googleusercontent.com")
+          provider: new GoogleLoginProvider(appConfig.googleClientId)
         },
       ]
   );
