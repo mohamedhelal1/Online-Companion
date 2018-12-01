@@ -9,6 +9,7 @@ services:
     
     links:
       - mongo
+      - angular
   mongo:
     container_name: mongo
     image: mongo
@@ -22,5 +23,4 @@ services:
       dockerfile: frontend/Dockerfile
     ports: 
       - '4200:4200'
-    volumes:
-      - ./frontend:/OnlineCompanion-Frontend
+   
