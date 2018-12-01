@@ -5,6 +5,9 @@ var config = require('../Config');
 var router = express.Router();
 var noteCtrl = require('../controllers/note.controller');
 var authCtrl = require('../controllers/auth.controller');
+var weatherCtrl = require('../controllers/weather.controller');
+var quotesCtrl = require('../controllers/quotes.controller');
+
 var isAuthenticated = function(req, res, next) {
   // Check that the request has the JWT in the authorization header
   var token = req.headers['authorization'];
@@ -43,5 +46,9 @@ router.post('/note/createNote',isAuthenticated , noteCtrl.createNote);
 router.get('/note/getNotes',isAuthenticated , noteCtrl.getNotes);
 router.delete('/note/deleteNote/:noteID',isAuthenticated , noteCtrl.deleteNote);
 router.patch('/note/updateNote/:noteID',isAuthenticated ,noteCtrl.updateNote);
+
+router.post('/getWeather', weatherCtrl.getWeather);
+router.get('/getRandomQuote', quotesCtrl.getQuote);
+
 
 module.exports = router;
