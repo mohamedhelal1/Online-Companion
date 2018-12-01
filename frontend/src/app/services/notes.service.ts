@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers} from '@angular/http';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
@@ -11,9 +10,16 @@ export class NotesService {
    token = localStorage.getItem('Authentication');
   constructor(private http: HttpClient) { }
 
+  httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': this.token
+  })
+};
+
   getNotes(){
-    //token 
-    this.http.get('http://localhost:80/note/getNotes', this.token).subscribe((res: any) => {
+    //token
+    this.http.get('http://localhost:80/note/getNotes', this.httpOptions).subscribe((res: any) => {
      this.notes = res.data;
 
     });
@@ -24,15 +30,15 @@ export class NotesService {
       title: titleIn,
       description: descriptionIn,
     }
-    this.http.post('http://localhost:80/note/createNote' ,this.token, body)
+    this.http.post('http://localhost:80/note/createNote' ,body,this.httpOptions)
     .subscribe(res => {
        //worth it?
        this.getNotes();
     });
   }
-  
+
   deleteNote(noteID) {
-    this.http.delete('http://localhost:80/note/deleteNote/:' +noteID,this.token)
+    this.http.delete('http://localhost:80/note/deleteNote/:' +noteID,this.httpOptions)
       .subscribe(res => {
         //worth it?
         this.getNotes();
@@ -44,7 +50,7 @@ export class NotesService {
       title: titleIn,
       description: descriptionIn,
     }
-    this.http.patch('http://localhost:80/note/updateNote/:' +noteID,this.token , body)
+    this.http.patch('http://localhost:80/note/updateNote/:' +noteID,body,this.httpOptions)
     .subscribe(res => {
        //worth it?
        this.getNotes();
