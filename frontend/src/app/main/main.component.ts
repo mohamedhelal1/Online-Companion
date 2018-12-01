@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../services/notes.service';
+import { WeatherService } from '../services/weather.service';
 
 @Component({
   selector: 'app-main',
@@ -8,9 +9,10 @@ import { NotesService } from '../services/notes.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private notes : NotesService) { }
+constructor(private notes : NotesService,private weather : WeatherService) { }
 
   ngOnInit() {
+    console.log(this.weather.getLocation())
   }
 
 }
