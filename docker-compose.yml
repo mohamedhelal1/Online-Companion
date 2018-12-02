@@ -5,11 +5,11 @@ services:
     restart: always
     build: .
     ports:
-      - '80:3000'
+      - '3000:3000'
     
     links:
       - mongo
-   #   - angular
+      - angular
   mongo:
     container_name: mongo
     image: mongo
