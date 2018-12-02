@@ -47,7 +47,7 @@ router.get('/note/getNotes',isAuthenticated , noteCtrl.getNotes);
 router.delete('/note/deleteNote/:noteID',isAuthenticated , noteCtrl.deleteNote);
 router.patch('/note/updateNote/:noteID',isAuthenticated ,noteCtrl.updateNote);
 
-router.post('/getWeather', weatherCtrl.getWeather);
+router.get('/getWeather/:long/:lat', weatherCtrl.getWeather);
 router.get('/getRandomQuote', quotesCtrl.getQuote);
 
 

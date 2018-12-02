@@ -12,7 +12,7 @@ export class MainComponent implements OnInit {
   constructor(private http: HttpClient, private modalService: NgbModal) {}
   public notes;
   closeResult: string;
-
+  weather;
   httpOptions;
   quote;
 
@@ -30,18 +30,17 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.notes = [];
+
     if (this.getToken()) {
-      this.notes = [];
       this.httpOptions = this.getHeaders();
       this.getNotes();
     }
     this.getRandomQuote();
-    //this.getWeather();
+    this.getWeather();
   }
 
   getRandomQuote() {
-    this.httpOptions = this.getHeaders();
-
     this.http
       .get(appConfig.backendUrl + "getRandomQuote")
       .subscribe((res: any) => {
@@ -50,11 +49,31 @@ export class MainComponent implements OnInit {
   }
 
   getWeather() {
-    this.httpOptions = this.getHeaders();
-
-    this.http.get(appConfig.backendUrl + "getWeather").subscribe((res: any) => {
-      console.log(res.data);
-    });
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          this.http
+            .get(
+              appConfig.backendUrl +
+                "getWeather/" +
+                position.coords.longitude +
+                "/" +
+                position.coords.latitude
+            )
+            .subscribe((res: any) => {
+              this.weather = res.data;
+            });
+        },
+        error => {
+          console.log(error);
+          this.http
+            .get(appConfig.backendUrl + "getWeather/31/30")
+            .subscribe((res: any) => {
+              this.weather = res.data;
+            });
+        }
+      );
+    }
   }
 
   getNotes() {
@@ -68,7 +87,11 @@ export class MainComponent implements OnInit {
   }
 
   createNewNote(title, description) {
+
     this.httpOptions = this.getHeaders();
+
+if(title.trim() && description.trim())
+{
 
     var body = {
       title: title,
@@ -77,9 +100,9 @@ export class MainComponent implements OnInit {
     this.http
       .post(appConfig.backendUrl + "note/createNote", body, this.httpOptions)
       .subscribe(res => {
-        //worth it?
         this.getNotes();
       });
+    }
   }
 
   deleteNote(noteID) {
@@ -91,14 +114,14 @@ export class MainComponent implements OnInit {
         this.httpOptions
       )
       .subscribe(res => {
-        //worth it?
         this.getNotes();
       });
   }
 
   updateNote(noteID, titleIn, descriptionIn) {
     this.httpOptions = this.getHeaders();
-
+    if(titleIn.trim() && descriptionIn.trim())
+    {
     var body = {
       title: titleIn,
       description: descriptionIn
@@ -110,10 +133,10 @@ export class MainComponent implements OnInit {
         this.httpOptions
       )
       .subscribe(res => {
-        //worth it?
         this.modalService.dismissAll();
         this.getNotes();
       });
+    }
   }
 
   open(content) {

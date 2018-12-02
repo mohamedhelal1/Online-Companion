@@ -8,7 +8,7 @@ const helper = new OpenWeatherMapHelper({
 
 
   module.exports.getWeather = function(req, res, next) {
-    helper.getCurrentWeatherByGeoCoordinates(req.body.lat, req.body.long, (err, currentWeather) => {
+    helper.getCurrentWeatherByGeoCoordinates(req.params.lat, req.params.long, (err, currentWeather) => {
           if (err) {
             console.log(err);
           } else {

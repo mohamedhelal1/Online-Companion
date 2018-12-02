@@ -10,14 +10,12 @@
     </blockquote>
   </div>
   <div class="col-6">
-    <blockquote *ngIf="quote" class="quote-card blue-card">
-      <p>
-        {{quote[0].title}}
-      </p>
-
-      <cite [innerHTML]="quote[0].content">
-      </cite>
-    </blockquote>
+    <div *ngIf="weather" class="card text-white bg-warning mb-3">
+      <div class="card-header">Weather</div>
+      <div class="card-body">
+        <p class="card-text">{{weather}}</p>
+      </div>
+    </div>
   </div>
   <div class="col-4" style="margin:auto;">
     <div class="form-group">
