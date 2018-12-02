@@ -1,33 +1,33 @@
 <div class="row" *ngIf="getToken()">
   <div class="col-6">
-    <blockquote  *ngIf="quote" class="quote-card blue-card">
-                 <p>
-                   {{quote[0].title}}
-                 </p>
+    <blockquote *ngIf="quote" class="quote-card blue-card">
+      <p>
+        {{quote[0].title}}
+      </p>
 
-                 <cite [innerHTML]="quote[0].content">
-                 </cite>
+      <cite [innerHTML]="quote[0].content">
+      </cite>
     </blockquote>
   </div>
   <div class="col-6">
     <blockquote *ngIf="quote" class="quote-card blue-card">
-                 <p>
-                   {{quote[0].title}}
-                 </p>
+      <p>
+        {{quote[0].title}}
+      </p>
 
-                 <cite [innerHTML]="quote[0].content">
-                 </cite>
+      <cite [innerHTML]="quote[0].content">
+      </cite>
     </blockquote>
   </div>
-<div class="col-4" style="margin:auto;">
-  <div class="form-group">
-    <input placeholder="Title" type="text" class="form-control" id="title" #title>
-    <div class="pt-2 pb-2"></div>
-    <textarea placeholder="Description" class="form-control" rows="3" id="description" #description></textarea>
-    <div class="pt-2 pb-2"></div>
-    <button type="button" class="btn btn-primary btn-block" (click)="createNewNote(title.value,description.value)">Create new note</button>
+  <div class="col-4" style="margin:auto;">
+    <div class="form-group">
+      <input placeholder="Title" type="text" class="form-control" id="title" #title>
+      <div class="pt-2 pb-2"></div>
+      <textarea placeholder="Description" class="form-control" rows="3" id="description" #description></textarea>
+      <div class="pt-2 pb-2"></div>
+      <button type="button" class="btn btn-primary btn-block" (click)="createNewNote(title.value,description.value)">Create new note</button>
+    </div>
   </div>
-</div>
 
 
 </div>
@@ -48,9 +48,7 @@
       </div>
     </div>
 
-
-
-      <ng-template #content let-modal>
+    <ng-template #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Note update</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -74,7 +72,7 @@
 
 
 <div class="row" *ngIf="!getToken()">
-<div class="col-12">
-<h1 class="mt-5 pt-5 text-center">SignIn with google enjoy Online Companion</h1>
-</div>
+  <div class="col-12">
+    <h1 class="mt-5 pt-5 text-center">SignIn with google enjoy Online Companion</h1>
+  </div>
 </div>

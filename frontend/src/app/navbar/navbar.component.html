@@ -12,11 +12,11 @@
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">
       <li class="nav-item" *ngIf="!logged">
-        <button (click)="socialSignIn()" >Sign in with Google</button>
+        <button (click)="socialSignIn()">Sign in with Google</button>
       </li>
       <li class="nav-item" *ngIf="logged">
-        <button (click)="socialSignOut()" >hi {{name}} logout</button>
+        <button (click)="socialSignOut()">hi {{name}} logout</button>
       </li>
-    </ul> 
+    </ul>
   </div>
 </nav>
