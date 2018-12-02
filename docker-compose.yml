@@ -9,15 +9,14 @@ services:
     
     links:
       - mongo
-      #- angular
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - '27017:27017'
   angular:
-   container_name: angular
+    container_name: angular
     restart: always
     build: frontend  
     ports: 
-     - '4200:4200'
+      - '4200:4200'

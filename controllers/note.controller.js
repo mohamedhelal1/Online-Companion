@@ -15,24 +15,7 @@ module.exports.createNote = function(req, res, next) {
             .status(404)
             .json({ err: null, msg: 'User not found.', data: null });
         }
-        var newNoteTitle = req.body.title.trim();
-
-        var noteTitleExists = user.notes.some(function(note) {
-          return note.title == newNoteTitle;
-        });
-
-        if (noteTitleExists) {
-          return res.status(409).json({
-            err: null,
-            msg:
-              'A note with the same title "' +
-              newNoteTitle +
-              '" already exists, please try another name.',
-            data: null
-          });
-        }
-    
-    
+        
         var newNote = user.notes.create(req.body);
         user.notes.push(newNote);
         user.save(function(err) {
