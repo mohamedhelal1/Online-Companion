@@ -9,7 +9,7 @@ services:
     
     links:
       - mongo
-      - angular
+      #- angular
   mongo:
     container_name: mongo
     image: mongo
