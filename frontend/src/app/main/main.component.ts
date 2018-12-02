@@ -40,9 +40,10 @@ headers: new HttpHeaders({
     this.notes = [];
     this.httpOptions = this.getHeaders();
     this.getNotes();
-    this.getRandomQuote();
-    //this.getWeather();
   }
+  this.getRandomQuote();
+  //this.getWeather();
+
   }
 
 
@@ -50,7 +51,6 @@ headers: new HttpHeaders({
     this.httpOptions = this.getHeaders();
 
     this.http.get(appConfig.backendUrl+'getRandomQuote').subscribe((res: any) => {
-      console.log(res.data);
       this.quote = res.data;
      });
   }

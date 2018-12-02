@@ -1,6 +1,6 @@
 <div class="row" *ngIf="getToken()">
   <div class="col-6">
-    <blockquote class="quote-card blue-card">
+    <blockquote  *ngIf="quote" class="quote-card blue-card">
                  <p>
                    {{quote[0].title}}
                  </p>
@@ -10,7 +10,7 @@
     </blockquote>
   </div>
   <div class="col-6">
-    <blockquote class="quote-card blue-card">
+    <blockquote *ngIf="quote" class="quote-card blue-card">
                  <p>
                    {{quote[0].title}}
                  </p>
@@ -70,4 +70,11 @@
   </div>
 
 
+</div>
+
+
+<div class="row" *ngIf="!getToken()">
+<div class="col-12">
+<h1 class="mt-5 pt-5 text-center">SignIn with google enjoy Online Companion</h1>
+</div>
 </div>
