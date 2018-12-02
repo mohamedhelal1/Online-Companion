@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {appConfig} from "../../../app.config";
 
 @Component({
   selector: 'app-main',
@@ -30,7 +31,7 @@ headers: new HttpHeaders({
 
   getNotes(){
     //token
-    this.http.get('http://localhost:80/note/getNotes', this.httpOptions).subscribe((res: any) => {
+    this.http.get(appConfig.backendUrl+'getNotes', this.httpOptions).subscribe((res: any) => {
      this.notes = res.data;
     });
   }
