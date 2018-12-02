@@ -27,7 +27,7 @@ headers: new HttpHeaders({
     this.notes = [];
     this.getNotes();
     this.getRandomQuote();
-    this.getWeather();
+    //this.getWeather();
   }
 
 

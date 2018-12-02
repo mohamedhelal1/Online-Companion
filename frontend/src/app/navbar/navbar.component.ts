@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
     );
   }
   public socialSignOut(){
-    localStorage.setItem("Authentication", null);
+    localStorage.clear();
     this.logged =false;
   }
 }
