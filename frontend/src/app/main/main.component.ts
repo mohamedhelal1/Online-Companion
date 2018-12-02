@@ -15,7 +15,7 @@ public notes;
 closeResult: string;
 
  httpOptions;
-
+quote;
 
 getToken()
 {
@@ -35,11 +35,14 @@ headers: new HttpHeaders({
 
 
   ngOnInit() {
+    if(this.getToken())
+    {
     this.notes = [];
     this.httpOptions = this.getHeaders();
     this.getNotes();
     this.getRandomQuote();
     //this.getWeather();
+  }
   }
 
 
@@ -48,6 +51,7 @@ headers: new HttpHeaders({
 
     this.http.get(appConfig.backendUrl+'getRandomQuote').subscribe((res: any) => {
       console.log(res.data);
+      this.quote = res.data;
      });
   }
 
