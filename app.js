@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var config = require('./Config');
+const cors = require('cors');
 
 var { db: { host, port, name } } = config;
 const dbUrl = `mongodb://${host}:${port}/${name}`;
@@ -39,6 +40,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  }),
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
