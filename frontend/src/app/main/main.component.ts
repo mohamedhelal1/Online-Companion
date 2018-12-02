@@ -31,7 +31,7 @@ headers: new HttpHeaders({
 
   getNotes(){
     //token
-    this.http.get(appConfig.backendUrl+'getNotes', this.httpOptions).subscribe((res: any) => {
+    this.http.get(appConfig.backendUrl+'note/getNotes', this.httpOptions).subscribe((res: any) => {
      this.notes = res.data;
     });
   }
@@ -41,7 +41,7 @@ headers: new HttpHeaders({
       title: titleIn,
       description: descriptionIn,
     }
-    this.http.post('http://localhost:80/note/createNote' ,body,this.httpOptions)
+    this.http.post(appConfig.backendUrl+'note/createNote' ,body,this.httpOptions)
     .subscribe(res => {
        //worth it?
        console.log(res)
@@ -50,7 +50,7 @@ headers: new HttpHeaders({
   }
 
   deleteNote(noteID) {
-    this.http.delete('http://localhost:80/note/deleteNote/:' +noteID,this.httpOptions)
+    this.http.delete(appConfig.backendUrl+'note/deleteNote/' +noteID,this.httpOptions)
       .subscribe(res => {
         //worth it?
         console.log(res)
@@ -64,7 +64,7 @@ headers: new HttpHeaders({
       title: titleIn,
       description: descriptionIn,
     }
-    this.http.patch('http://localhost:80/note/updateNote/:' +noteID,body,this.httpOptions)
+    this.http.patch(appConfig.backendUrl+'note/updateNote/' +noteID,body,this.httpOptions)
     .subscribe(res => {
        //worth it?
        console.log(res)
