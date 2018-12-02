@@ -23,7 +23,6 @@ headers: new HttpHeaders({
 
   ngOnInit() {
     this.getNotes();
-    console.log(this.notes)
   }
 
 
@@ -32,7 +31,7 @@ headers: new HttpHeaders({
   getNotes(){
     //token
     this.http.get(appConfig.backendUrl+'note/getNotes', this.httpOptions).subscribe((res: any) => {
-     this.notes = res.data;
+     console.log(res.data);
     });
   }
 
