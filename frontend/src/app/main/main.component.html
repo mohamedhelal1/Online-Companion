@@ -23,10 +23,31 @@
         <p class="card-text">{{note.description}}</p>
       </div>
       <div class="card-footer border-white">
-        <button type="button" class="btn btn-danger" (click)="deleteNote(note._id)">Delete</button>
+        <button type="button" class="btn btn-secondary mr-2" style="width:100px;" (click)="open(content)">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="deleteNote(note._id)" style="width:100px;">Delete</button>
       </div>
     </div>
 
+
+
+      <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Note update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input placeholder="Title" type="text" class="form-control" id="title" value="{{note.title}}" #title>
+        <div class="pt-2 pb-2"></div>
+        <textarea placeholder="Description" class="form-control" rows="3" id="description" #description>{{note.description}}</textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateNote(note._id,title.value,description.value)">Save</button>
+      </div>
+    </ng-template>
+
   </div>
+
 
 </div>

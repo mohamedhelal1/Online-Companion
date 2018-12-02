@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import {appConfig} from "../../app.config";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   AuthServiceConfig,
@@ -40,6 +41,7 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     AppRoutingModule,
     SocialLoginModule,
+    NgbModule
 
     ],
     providers: [

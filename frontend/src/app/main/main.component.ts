@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {appConfig} from "../../../app.config";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-main',
@@ -9,9 +10,10 @@ import {appConfig} from "../../../app.config";
 })
 export class MainComponent implements OnInit {
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient,private modalService: NgbModal) { }
 token = localStorage.getItem('Authentication');
 public notes;
+closeResult: string;
 
 httpOptions = {
 headers: new HttpHeaders({
@@ -24,6 +26,8 @@ headers: new HttpHeaders({
   ngOnInit() {
     this.notes = [];
     this.getNotes();
+    this.getRandomQuote();
+    this.getWeather();
   }
 
 
@@ -53,8 +57,6 @@ headers: new HttpHeaders({
     }
     this.http.post(appConfig.backendUrl+'note/createNote' ,body,this.httpOptions).subscribe(res => {
       //worth it?
-      console.log(res)
-
       this.getNotes();
   });
   }
@@ -64,8 +66,6 @@ headers: new HttpHeaders({
     this.http.delete(appConfig.backendUrl+'note/deleteNote/' +noteID,this.httpOptions)
       .subscribe(res => {
         //worth it?
-        console.log(res)
-
         this.getNotes();
     });
   }
@@ -78,10 +78,26 @@ headers: new HttpHeaders({
     this.http.patch(appConfig.backendUrl+'note/updateNote/' +noteID,body,this.httpOptions)
     .subscribe(res => {
        //worth it?
-       console.log(res)
-
+       this.modalService.dismissAll();
        this.getNotes();
     });
   }
 
-}
+  open(content) {
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
+  }
