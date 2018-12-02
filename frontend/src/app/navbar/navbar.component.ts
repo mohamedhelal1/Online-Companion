@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
 
   logged = false;
-
+  name:string;
   ngOnInit() {
   }
   public socialSignIn() {
@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
 
     this.auth.signIn(socialPlatformProvider).then(
       (userData) => {
+        this.name=userData.name;
         console.log(userData.token);
         this.http.post(appConfig.backendUrl+"auth/login", { access_token: userData.token } )
         .subscribe((res: any) => {
