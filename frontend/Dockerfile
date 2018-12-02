@@ -1,18 +1,15 @@
 # Stage 1
 FROM node:10
-
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+COPY package*.json /usr/src/app
 
-
-COPY package*.json ./
-
-
+RUN npm cache clean
 RUN npm install
-RUN npm install -g @angular/cli
-COPY . .
+
+COPY . /usr/src/app
 
 EXPOSE 4200
 
-CMD ["ng", "serve"]
+CMD ["npm", "start"]
