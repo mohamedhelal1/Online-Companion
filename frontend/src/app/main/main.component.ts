@@ -11,7 +11,7 @@ export class MainComponent implements OnInit {
 
 constructor(private http: HttpClient) { }
 token = localStorage.getItem('Authentication');
-public notes =[];
+public notes;
 
 httpOptions = {
 headers: new HttpHeaders({
@@ -22,6 +22,7 @@ headers: new HttpHeaders({
 
 
   ngOnInit() {
+    this.notes = [];
     this.getNotes();
   }
 
@@ -29,24 +30,25 @@ headers: new HttpHeaders({
 
 
   getNotes(){
-    //token
     this.http.get(appConfig.backendUrl+'note/getNotes', this.httpOptions).subscribe((res: any) => {
-     console.log(res.data);
+     this.notes = res.data;
     });
   }
 
-  createNote(titleIn,descriptionIn){
+  createNewNote(title,description)
+  {
     var body = {
-      title: titleIn,
-      description: descriptionIn,
+      title: title,
+      description: description,
     }
-    this.http.post(appConfig.backendUrl+'note/createNote' ,body,this.httpOptions)
-    .subscribe(res => {
-       //worth it?
-       console.log(res)
-       this.getNotes();
-    });
+    this.http.post(appConfig.backendUrl+'note/createNote' ,body,this.httpOptions).subscribe(res => {
+      //worth it?
+      console.log(res)
+
+      this.getNotes();
+  });
   }
+
 
   deleteNote(noteID) {
     this.http.delete(appConfig.backendUrl+'note/deleteNote/' +noteID,this.httpOptions)

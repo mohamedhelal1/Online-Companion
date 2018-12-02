@@ -15,9 +15,9 @@ services:
     image: mongo
     ports:
       - '27017:27017'
-  angular:
-    container_name: angular
-    restart: always
-    build: frontend  
-    ports: 
-      - '4200:4200'
+  #angular:
+    #container_name: angular
+    #restart: always
+    #build: frontend  
+   # ports: 
+    #  - '4200:4200'
