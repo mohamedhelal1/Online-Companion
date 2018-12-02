@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
     else{
       this.logged = false;
     }
+    this.name=localStorage.getItem("name");
   }
   public socialSignIn() {
 
@@ -31,6 +32,7 @@ export class NavbarComponent implements OnInit {
 
     this.auth.signIn(socialPlatformProvider).then(
       (userData) => {
+        localStorage.setItem("name",userData.name);
         this.name=userData.name;
         this.http.post(appConfig.backendUrl+"auth/login", { access_token: userData.token } )
         .subscribe((res: any) => {
