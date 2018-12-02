@@ -15,8 +15,14 @@ export class NavbarComponent implements OnInit {
 
 
   logged = false;
-  name:string;
+  name;
   ngOnInit() {
+    if(localStorage.getItem("Authentication")){
+      this.logged = true;
+    }
+    else{
+      this.logged = false;
+    }
   }
   public socialSignIn() {
 

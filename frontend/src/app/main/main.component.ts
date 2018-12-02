@@ -11,14 +11,13 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class MainComponent implements OnInit {
 
 constructor(private http: HttpClient,private modalService: NgbModal) { }
-token = localStorage.getItem('Authentication');
 public notes;
 closeResult: string;
 
 httpOptions = {
 headers: new HttpHeaders({
   'Content-Type':  'application/json',
-  'Authorization': this.token
+  'Authorization': localStorage.getItem('Authentication')
 })
 };
 
@@ -55,6 +54,8 @@ headers: new HttpHeaders({
       title: title,
       description: description,
     }
+    console.log(this.httpOptions);
+    
     this.http.post(appConfig.backendUrl+'note/createNote' ,body,this.httpOptions).subscribe(res => {
       //worth it?
       this.getNotes();
