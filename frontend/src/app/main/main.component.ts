@@ -27,13 +27,13 @@ headers: new HttpHeaders({
 
 
   getRandomQuote(){
-    this.http.get(appConfig.backendUrl+'/getRandomQuote').subscribe((res: any) => {
+    this.http.get(appConfig.backendUrl+'getRandomQuote').subscribe((res: any) => {
       console.log(res.data);
      });
   }
 
   getWeather(){
-    this.http.get(appConfig.backendUrl+'/getWeather').subscribe((res: any) => {
+    this.http.get(appConfig.backendUrl+'getWeather').subscribe((res: any) => {
       console.log(res.data);
      });
   }
