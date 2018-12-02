@@ -14,16 +14,29 @@ constructor(private http: HttpClient,private modalService: NgbModal) { }
 public notes;
 closeResult: string;
 
-httpOptions = {
+ httpOptions;
+
+
+getToken()
+{
+  return localStorage.getItem('Authentication');
+}
+
+
+getHeaders()
+{
+return {
 headers: new HttpHeaders({
   'Content-Type':  'application/json',
-  'Authorization': localStorage.getItem('Authentication')
+  'Authorization': this.getToken()
 })
 };
+}
 
 
   ngOnInit() {
     this.notes = [];
+    this.httpOptions = this.getHeaders();
     this.getNotes();
     this.getRandomQuote();
     //this.getWeather();
@@ -31,18 +44,24 @@ headers: new HttpHeaders({
 
 
   getRandomQuote(){
+    this.httpOptions = this.getHeaders();
+
     this.http.get(appConfig.backendUrl+'getRandomQuote').subscribe((res: any) => {
       console.log(res.data);
      });
   }
 
   getWeather(){
+    this.httpOptions = this.getHeaders();
+
     this.http.get(appConfig.backendUrl+'getWeather').subscribe((res: any) => {
       console.log(res.data);
      });
   }
 
   getNotes(){
+    this.httpOptions = this.getHeaders();
+
     this.http.get(appConfig.backendUrl+'note/getNotes', this.httpOptions).subscribe((res: any) => {
      this.notes = res.data;
     });
@@ -50,12 +69,12 @@ headers: new HttpHeaders({
 
   createNewNote(title,description)
   {
+    this.httpOptions = this.getHeaders();
+
     var body = {
       title: title,
       description: description,
     }
-    console.log(this.httpOptions);
-    
     this.http.post(appConfig.backendUrl+'note/createNote' ,body,this.httpOptions).subscribe(res => {
       //worth it?
       this.getNotes();
@@ -64,6 +83,8 @@ headers: new HttpHeaders({
 
 
   deleteNote(noteID) {
+    this.httpOptions = this.getHeaders();
+
     this.http.delete(appConfig.backendUrl+'note/deleteNote/' +noteID,this.httpOptions)
       .subscribe(res => {
         //worth it?
@@ -72,6 +93,8 @@ headers: new HttpHeaders({
   }
 
   updateNote(noteID,titleIn,descriptionIn){
+    this.httpOptions = this.getHeaders();
+
     var body = {
       title: titleIn,
       description: descriptionIn,

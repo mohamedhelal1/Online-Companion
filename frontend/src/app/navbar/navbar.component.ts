@@ -32,10 +32,8 @@ export class NavbarComponent implements OnInit {
     this.auth.signIn(socialPlatformProvider).then(
       (userData) => {
         this.name=userData.name;
-        console.log(userData.token);
         this.http.post(appConfig.backendUrl+"auth/login", { access_token: userData.token } )
         .subscribe((res: any) => {
-          console.log(res.token)
           localStorage.setItem("Authentication", res.token);
           this.logged =true;
         });
