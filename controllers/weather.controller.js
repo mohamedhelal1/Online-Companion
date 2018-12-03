@@ -12,7 +12,7 @@ const helper = new OpenWeatherMapHelper({
           if (err) {
             console.log(err);
           } else {
-            const weatherAndTempreature = "The weather in " + currentWeather.name + " is " + currentWeather.weather[0].description + " and the tempreature is " + Math.ceil(currentWeather.main.temp-272.15) + "°C";
+            const weatherAndTempreature = "The weather is " + currentWeather.weather[0].description + " and the tempreature is " + Math.ceil(currentWeather.main.temp-272.15) + "°C";
             return res.status(200).json({
                     err: null,
                     msg: 'Weather succesfully retrived.',
