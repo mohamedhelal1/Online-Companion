@@ -1,0 +1,76 @@
+<div class="row" *ngIf="getToken()">
+  <div class="col-6">
+    <blockquote *ngIf="quote" class="quote-card blue-card">
+      <p>
+        {{quote[0].title}}
+      </p>
+
+      <cite [innerHTML]="quote[0].content">
+      </cite>
+    </blockquote>
+  </div>
+  <div class="col-6">
+    <div *ngIf="weather" class="card text-white bg-warning mb-3">
+      <div class="card-header">Weather</div>
+      <div class="card-body">
+        <p class="card-text">{{weather}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-4" style="margin:auto;">
+    <div class="form-group">
+      <input placeholder="Title" type="text" class="form-control" id="title" #title>
+      <div class="pt-2 pb-2"></div>
+      <textarea placeholder="Description" class="form-control" rows="3" id="description" #description></textarea>
+      <div class="pt-2 pb-2"></div>
+      <button type="button" class="btn btn-primary btn-block" (click)="createNewNote(title.value,description.value)">Create new note</button>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row" *ngIf="getToken()">
+
+  <div class="col-3" *ngFor="let note of notes">
+
+
+    <div class="card border-white mb-3 bg-primary text-white" style="max-width: 18rem; min-height: 230px;">
+      <div class="card-header border-white">{{note.title}}</div>
+      <div class="card-body text-white">
+        <p class="card-text">{{note.description}}</p>
+      </div>
+      <div class="card-footer border-white">
+        <button type="button" class="btn btn-secondary mr-2" style="width:100px;" (click)="open(content)">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="deleteNote(note._id)" style="width:100px;">Delete</button>
+      </div>
+    </div>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Note update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input placeholder="Title" type="text" class="form-control" id="title" value="{{note.title}}" #title>
+        <div class="pt-2 pb-2"></div>
+        <textarea placeholder="Description" class="form-control" rows="3" id="description" #description>{{note.description}}</textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateNote(note._id,title.value,description.value)">Save</button>
+      </div>
+    </ng-template>
+
+  </div>
+
+
+</div>
+
+
+<div class="row" *ngIf="!getToken()">
+  <div class="col-12">
+    <h1 class="mt-5 pt-5 text-center">SignIn with google enjoy Online Companion</h1>
+  </div>
+</div>
