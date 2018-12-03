@@ -107,10 +107,14 @@ docker build -t frontend .
 docker run -p 4200:4200 frontend
 ``` 
 
-note
+note 
+
    build
+   
     -t name and optionally a tag in the 'name:tag' format
+   
    run
+   
     -d run container in background and print container ID
     -p publish a container’s port(s) to the host
     --link add link to another container
