@@ -92,13 +92,33 @@ The --build flag runs both Dockerfile-s in the front and backend before running 
 
 In **Online-Companion** run the following commands as an **alternative** for the above command.
 
+for mongo and backend
 ```
-docker run onlinecompanion
-cd frontend
-docker run angular
-docker-compose up 
+
+docker build -t backend .
+docker run -d --name mongo mongo
+docker run -p 3000:3000 --link mongo:mongo backend
 ``` 
 
+for frontend
+``` 
+cd frontend
+docker build -t frontend .
+docker run -p 4200:4200 frontend
+``` 
+
+note
+   build
+    -t name and optionally a tag in the 'name:tag' format
+   run
+    -d run container in background and print container ID
+    -p publish a container’s port(s) to the host
+    --link add link to another container
+    --name assign a name to the container
+    
+    
+    
+    
 Navigate in your browser to http://localhost:4200/ and enjoy our app
 
 To stop and remove running containers execute the following command
